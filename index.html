@@ -3,48 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Civic Action Project: Educational Equity</title>
+    <title>EduBridge: STEM & Career Exploration Platform</title>
     <style>
+        /* Base Styling */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #f4f6f9;
             color: #333;
         }
         header {
             background: #002b49;
             color: #ffffff;
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
         }
-        .container {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 20px;
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
         }
-        h2 { color: #002b49; border-bottom: 2px solid #f4f4f9; padding-bottom: 10px; }
-        ul { padding-left: 20px; }
+        header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        /* Section Styling */
+        .section-card {
+            background: #ffffff;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: #002b49;
+            border-bottom: 2px solid #eef2f5;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Search Engine Styling */
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ced4da;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+        .search-box:focus {
+            border-color: #002b49;
+            outline: none;
+        }
+
+        /* Grid Framework for Opportunities */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .opportunity-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .opportunity-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .badge-stem { background: #e0f2fe; color: #0369a1; }
+        .badge-humanities { background: #fef3c7; color: #b45309; }
+        .badge-medical { background: #dcfce7; color: #15803d; }
+        
+        .op-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            color: #1e293b;
+        }
+        .op-host {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        .op-desc {
+            font-size: 14px;
+            color: #334155;
+            margin-bottom: 15px;
+        }
+        .btn-link {
+            display: inline-block;
+            color: #002b49;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+        .no-results {
+            display: none;
+            text-align: center;
+            color: #64748b;
+            padding: 20px;
+            grid-column: 1 / -1;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Civic Action Project</h1>
-        <p>Bridging the Regional & Experiential STEM Education Gap</p>
+        <h1>EduBridge Platform</h1>
+        <p>Bridging Regional Disparities with Experiential Career Networks</p>
     </header>
 
     <div class="container">
-        <h2>The Problem</h2>
-        <p>Current South Korean educational structures rely heavily on high-pressure, exam-centric paradigms. This creates severe information and accessibility bottlenecks for peripheral or underserved student populations, locking them out of vital hands-on career discovery before making irreversible academic choices.</p>
+        
+        <!-- About / Policy Overview -->
+        <div class="section-card">
+            <h2>Our Policy Mandate</h2>
+            <p>Our civilian association fights structural educational gaps by decentralizing access to real-world experience. By bringing high-impact corporate and academic programs into peripheral regions, we protect students from making blind, irreversible career choices under extreme academic stress.</p>
+        </div>
 
-        <h2>Our Policy Solution</h2>
-        <p>We advocate for decentralized, out-of-school experiential STEM and career exploration frameworks. By leveraging structural partnerships with corporate stakeholders (such as Samsung and SK Hynix) and prestigious institutions (such as POSTECH), we can systematically deliver project-based immersion to students who lack access to premium private academies.</p>
+        <!-- Search Engine Section -->
+        <div class="section-card">
+            <h2>Find Internships & Mentorships</h2>
+            <input type="text" id="searchInput" class="search-box" placeholder="Search by industry, company, region (e.g., Samsung, Dental, Mentorship, Gimpo)..." onkeyup="filterOpportunities()">
+            
+            <div class="grid" id="opportunitiesGrid">
+                
+                <!-- Opportunity 1 -->
+                <div class="opportunity-card" data-keywords="samsung semiconductor science classroom engineering stem mentor regional school">
+                    <span class="badge badge-stem">STEM Mentorship</span>
+                    <div class="op-title">Semiconductor Science Classroom</div>
+                    <div class="op-host">Hosted by: Samsung Electronics</div>
+                    <div class="op-desc">Regional out-of-school mentoring modules led by corporate researchers. Includes physical engineering kits and basic chip architecture instruction.</div>
+                    <a href="#" class="btn-link">Learn More & Apply →</a>
+                </div>
+
+                <!-- Opportunity 2 -->
+                <div class="opportunity-card" data-keywords="sk hynix heinstein software ai coding tech immersive school">
+                    <span class="badge badge-stem">STEM Program</span>
+                    <div class="op-title">Heinstein AI & Coding Camp</div>
+                    <div class="op-host">Hosted by: SK Hynix</div>
+                    <div class="op-desc">Hands-on corporate coding and problem-solving software immersion designed specifically for students in underserved regional sectors.</div>
+                    <a href="#" class="btn-link">Learn More & Apply →</a>
+                </div>
+
+                <!-- Opportunity 3 -->
+                <div class="opportunity-card" data-keywords="deron dental clinical dentistry clinic simulation medical doctor">
+                    <span class="badge badge-medical">Medical Internship</span>
+                    <div class="op-title">Clinical Dental Simulation Project</div>
+                    <div class="op-host">Hosted by: Deron Dental</div>
+                    <div class="op-desc">A project-based, simulation-driven immersion. Step into the roles of both dentist and patient, completing clinical oral structural exams.</div>
+                    <a href="#" class="btn-link">Learn More & Apply →</a>
+                </div>
+
+                <!-- Opportunity 4 -->
+                <div class="opportunity-card" data-keywords="thats guangzhou media journalism editing writing video production">
+                    <span class="badge badge-humanities">Media Internship</span>
+                    <div class="op-title">Digital Media & Publishing Immersion</div>
+                    <div class="op-host">Hosted by: That's Guangzhou</div>
+                    <div class="op-desc">A project-based journalism sprint covering interviewing, filming, and video editing, culminating in a public article release.</div>
+                    <a href="#" class="btn-link">Learn More & Apply →</a>
+                </div>
+
+                <!-- Opportunity 5 -->
+                <div class="opportunity-card" data-keywords="postech university engineering laboratory research mentor advanced math">
+                    <span class="badge badge-stem">Research Mentorship</span>
+                    <div class="op-title">Advanced Regional Lab Expeditions</div>
+                    <div class="op-host">Hosted by: POSTECH</div>
+                    <div class="op-desc">Connects peripheral high school students with university research mentors for collaborative, convergent science projects.</div>
+                    <a href="#" class="btn-link">Learn More & Apply →</a>
+                </div>
+
+                <!-- Opportunity 6 -->
+                <div class="opportunity-card" data-keywords="sgd pharma corporate human resources hr business administration survey feedback">
+                    <span class="badge badge-humanities">Business Project</span>
+                    <div class="op-title">Corporate HR & Communication Project</div>
+                    <div class="op-host">Hosted by: SGD Pharma</div>
+                    <div class="op-desc">Analyze workforce environments by designing staff surveys, gathering operational data, and creating internal media briefs.</div>
+                    <a href="#" class="btn-link">Learn More & Apply →</a>
+                </div>
+
+                <!-- Fallback No Results Message -->
+                <div id="noResults" class="no-results">
+                    No opportunities match your search. Try searching "STEM", "Medical", or a specific company.
+                </div>
+
+            </div>
+        </div>
+
     </div>
+
+    <!-- JavaScript Search Engine Functionality -->
+    <script>
+        function filterOpportunities() {
+            // Get user input and convert to lowercase for uniform matching
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const grid = document.getElementById('opportunitiesGrid');
+            const cards = grid.getElementsByClassName('opportunity-card');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+
+            // Loop through all opportunity cards
+            for (let i = 0; i < cards.length; i++) {
+                // Read the custom data-keywords attribute containing the tags
+                let keywords = cards[i].getAttribute('data-keywords');
+                
+                // Also pull visible text fields to ensure thorough matching
+                let cardText = cards[i].innerText.toLowerCase();
+                
+                // If input matches keywords or text, show card; otherwise, hide it
+                if (keywords.includes(input) || cardText.includes(input)) {
+                    cards[i].style.display = "";
+                    visibleCount++;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+
+            // Handle visibility of the "No Results" element
+            if (visibleCount === 0) {
+                noResults.style.display = "block";
+            } else {
+                noResults.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
