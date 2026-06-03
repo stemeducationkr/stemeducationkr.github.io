@@ -1,255 +1,600 @@
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduBridge: STEM & Career Exploration Platform</title>
+    <title>EduBridge | Experiential Career Network</title>
     <style>
-        /* Base Styling */
+        /* Apple-Inspired Minimalist CSS */
+        :root {
+            --bg-color: #fbfbfd;
+            --text-main: #1d1d1f;
+            --text-muted: #86868b;
+            --accent: #0066cc;
+            --nav-bg: rgba(0, 0, 0, 0.8);
+            --card-bg: #ffffff;
+        }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f6f9;
-            color: #333;
-        }
-        header {
-            background: #002b49;
-            color: #ffffff;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        header p {
-            margin: 10px 0 0 0;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-        
-        /* Section Styling */
-        .section-card {
-            background: #ffffff;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        h2 {
-            color: #002b49;
-            border-bottom: 2px solid #eef2f5;
-            padding-bottom: 10px;
-            margin-top: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
         }
 
-        /* Search Engine Styling */
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 48px;
+            background: var(--nav-bg);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        nav a {
+            color: #f5f5f7;
+            text-decoration: none;
+            font-size: 12px;
+            margin: 0 20px;
+            letter-spacing: -0.01em;
+            transition: opacity 0.3s;
+        }
+        nav a:hover { opacity: 0.7; }
+
+        /* Hero & Search Engine */
+        .hero {
+            text-align: center;
+            padding: 140px 20px 60px;
+            background: var(--bg-color);
+        }
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin: 0 0 15px;
+        }
+        .hero p {
+            font-size: 24px;
+            color: var(--text-muted);
+            margin: 0 0 40px;
+            font-weight: 400;
+        }
+        .search-container {
+            position: relative;
+            max-width: 680px;
+            margin: 0 auto;
+        }
         .search-box {
             width: 100%;
-            padding: 15px;
-            font-size: 16px;
-            border: 2px solid #ced4da;
-            border-radius: 6px;
+            padding: 20px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 40px;
+            background: #ffffff;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
             box-sizing: border-box;
-            margin-bottom: 20px;
-            transition: border-color 0.3s ease;
+            transition: box-shadow 0.3s ease;
+            outline: none;
+            color: var(--text-main);
+            font-family: inherit;
         }
         .search-box:focus {
-            border-color: #002b49;
-            outline: none;
+            box-shadow: 0 12px 32px rgba(0,102,204,0.15);
         }
 
-        /* Grid Framework for Opportunities */
+        /* Grid Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
         }
-        .opportunity-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 20px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
-        .opportunity-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
         }
         .badge {
-            display: inline-block;
-            padding: 4px 8px;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-bottom: 10px;
+            align-self: flex-start;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        .badge-stem { background: #e0f2fe; color: #0369a1; }
-        .badge-humanities { background: #fef3c7; color: #b45309; }
-        .badge-medical { background: #dcfce7; color: #15803d; }
+        .b-stem { background: #e8f4fd; color: #0066cc; }
+        .b-med { background: #e3f5eb; color: #15803d; }
+        .b-hum { background: #fdf2e3; color: #b45309; }
+        .b-comp { background: #f3e8fd; color: #6b21a8; }
         
-        .op-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0 0 5px 0;
-            color: #1e293b;
-        }
-        .op-host {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 15px;
-        }
-        .op-desc {
-            font-size: 14px;
-            color: #334155;
-            margin-bottom: 15px;
-        }
-        .btn-link {
-            display: inline-block;
-            color: #002b49;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .btn-link:hover {
-            text-decoration: underline;
-        }
-        .no-results {
+        .c-title { font-size: 21px; font-weight: 600; margin: 0 0 8px; }
+        .c-host { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
+        .c-desc { font-size: 15px; color: var(--text-main); margin-bottom: 20px; flex-grow: 1; }
+        .c-link { color: var(--accent); font-weight: 600; font-size: 14px; }
+
+        /* Dynamic Subpage (Detail View) */
+        #detail-view {
             display: none;
-            text-align: center;
-            color: #64748b;
-            padding: 20px;
-            grid-column: 1 / -1;
+            padding: 120px 20px 80px;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.4s ease;
         }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 17px;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 30px;
+            font-family: inherit;
+        }
+        .back-btn:hover { text-decoration: underline; }
+        .det-title { font-size: 48px; font-weight: 700; margin: 0 0 10px; line-height: 1.1; }
+        .det-host { font-size: 21px; color: var(--text-muted); margin-bottom: 40px; }
+        .det-content {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text-main);
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+        }
+        .det-apply {
+            display: inline-block;
+            margin-top: 30px;
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Apple-Style Integrated Copilot Chat Widget */
+        .copilot-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(0,102,204,0.3);
+            cursor: pointer;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s ease;
+        }
+        .copilot-btn:hover { transform: scale(1.05); }
+        
+        .chat-window {
+            display: none;
+            position: fixed;
+            bottom: 95px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+            z-index: 10000;
+            flex-direction: column;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+        .chat-header {
+            background: #1d1d1f;
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-close {
+            background: none;
+            border: none;
+            color: #86868b;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #f5f5f7;
+        }
+        .msg {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .msg.bot {
+            background: #ffffff;
+            color: var(--text-main);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .msg.user {
+            background: var(--accent);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .chat-input-area {
+            padding: 15px;
+            background: #ffffff;
+            border-top: 1px solid #e5e5ea;
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input {
+            flex-grow: 1;
+            border: 1px solid #d2d2d7;
+            border-radius: 20px;
+            padding: 10px 15px;
+            outline: none;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        .chat-send {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Apple-Style Footer */
+        footer {
+            background: #f5f5f7;
+            padding: 50px 20px;
+            color: var(--text-muted);
+            font-size: 12px;
+            border-top: 1px solid #d2d2d7;
+        }
+        .footer-content {
+            max-width: 980px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #d2d2d7;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .footer-col h3 { color: var(--text-main); font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+        .footer-col ul { list-style: none; padding: 0; margin: 0; }
+        .footer-col ul li { margin-bottom: 6px; }
+        .footer-col ul li a { color: var(--text-muted); text-decoration: none; }
+        .footer-col ul li a:hover { text-decoration: underline; }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .no-results { display: none; text-align: center; color: var(--text-muted); padding: 40px; font-size: 18px; grid-column: 1 / -1; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>EduBridge Platform</h1>
-        <p>Bridging Regional Disparities with Experiential Career Networks</p>
-    </header>
+    <nav>
+        <a href="#" onclick="goHome()">EduBridge</a>
+        <a href="#" onclick="goHome()">Programs</a>
+        <a href="#footer">Contact</a>
+    </nav>
 
-    <div class="container">
-        
-        <!-- About / Policy Overview -->
-        <div class="section-card">
-            <h2>Our Policy Mandate</h2>
-            <p>Our civilian association fights structural educational gaps by decentralizing access to real-world experience. By bringing high-impact corporate and academic programs into peripheral regions, we protect students from making blind, irreversible career choices under extreme academic stress.</p>
-        </div>
-
-        <!-- Search Engine Section -->
-        <div class="section-card">
-            <h2>Find Internships & Mentorships</h2>
-            <input type="text" id="searchInput" class="search-box" placeholder="Search by industry, company, region (e.g., Samsung, Dental, Mentorship, Gimpo)..." onkeyup="filterOpportunities()">
-            
-            <div class="grid" id="opportunitiesGrid">
-                
-                <!-- Opportunity 1 -->
-                <div class="opportunity-card" data-keywords="samsung semiconductor science classroom engineering stem mentor regional school">
-                    <span class="badge badge-stem">STEM Mentorship</span>
-                    <div class="op-title">Semiconductor Science Classroom</div>
-                    <div class="op-host">Hosted by: Samsung Electronics</div>
-                    <div class="op-desc">Regional out-of-school mentoring modules led by corporate researchers. Includes physical engineering kits and basic chip architecture instruction.</div>
-                    <a href="#" class="btn-link">Learn More & Apply →</a>
-                </div>
-
-                <!-- Opportunity 2 -->
-                <div class="opportunity-card" data-keywords="sk hynix heinstein software ai coding tech immersive school">
-                    <span class="badge badge-stem">STEM Program</span>
-                    <div class="op-title">Heinstein AI & Coding Camp</div>
-                    <div class="op-host">Hosted by: SK Hynix</div>
-                    <div class="op-desc">Hands-on corporate coding and problem-solving software immersion designed specifically for students in underserved regional sectors.</div>
-                    <a href="#" class="btn-link">Learn More & Apply →</a>
-                </div>
-
-                <!-- Opportunity 3 -->
-                <div class="opportunity-card" data-keywords="deron dental clinical dentistry clinic simulation medical doctor">
-                    <span class="badge badge-medical">Medical Internship</span>
-                    <div class="op-title">Clinical Dental Simulation Project</div>
-                    <div class="op-host">Hosted by: Deron Dental</div>
-                    <div class="op-desc">A project-based, simulation-driven immersion. Step into the roles of both dentist and patient, completing clinical oral structural exams.</div>
-                    <a href="#" class="btn-link">Learn More & Apply →</a>
-                </div>
-
-                <!-- Opportunity 4 -->
-                <div class="opportunity-card" data-keywords="thats guangzhou media journalism editing writing video production">
-                    <span class="badge badge-humanities">Media Internship</span>
-                    <div class="op-title">Digital Media & Publishing Immersion</div>
-                    <div class="op-host">Hosted by: That's Guangzhou</div>
-                    <div class="op-desc">A project-based journalism sprint covering interviewing, filming, and video editing, culminating in a public article release.</div>
-                    <a href="#" class="btn-link">Learn More & Apply →</a>
-                </div>
-
-                <!-- Opportunity 5 -->
-                <div class="opportunity-card" data-keywords="postech university engineering laboratory research mentor advanced math">
-                    <span class="badge badge-stem">Research Mentorship</span>
-                    <div class="op-title">Advanced Regional Lab Expeditions</div>
-                    <div class="op-host">Hosted by: POSTECH</div>
-                    <div class="op-desc">Connects peripheral high school students with university research mentors for collaborative, convergent science projects.</div>
-                    <a href="#" class="btn-link">Learn More & Apply →</a>
-                </div>
-
-                <!-- Opportunity 6 -->
-                <div class="opportunity-card" data-keywords="sgd pharma corporate human resources hr business administration survey feedback">
-                    <span class="badge badge-humanities">Business Project</span>
-                    <div class="op-title">Corporate HR & Communication Project</div>
-                    <div class="op-host">Hosted by: SGD Pharma</div>
-                    <div class="op-desc">Analyze workforce environments by designing staff surveys, gathering operational data, and creating internal media briefs.</div>
-                    <a href="#" class="btn-link">Learn More & Apply →</a>
-                </div>
-
-                <!-- Fallback No Results Message -->
-                <div id="noResults" class="no-results">
-                    No opportunities match your search. Try searching "STEM", "Medical", or a specific company.
-                </div>
-
+    <div id="home-view">
+        <div class="hero">
+            <h1>Experience First.</h1>
+            <p>Search over 40+ career exploration programs across South Korea.</p>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-box" placeholder="Search by industry, company, region (e.g. Samsung, Medical, Seoul)..." onkeyup="filterCards()">
             </div>
         </div>
 
+        <div class="container">
+            <div class="grid" id="cardGrid">
+                </div>
+            <div id="noResults" class="no-results">No opportunities match your search.</div>
+        </div>
     </div>
 
-    <!-- JavaScript Search Engine Functionality -->
+    <div id="detail-view">
+        <button class="back-btn" onclick="goHome()">⟨ Back to Programs</button>
+        <h1 class="det-title" id="detTitle">Title</h1>
+        <div class="det-host" id="detHost">Host</div>
+        <div class="det-content">
+            <span class="badge" id="detBadge">Tag</span>
+            <div id="detFullDesc">Full description goes here...</div>
+            <a href="#" class="det-apply">Apply on Official Website</a>
+        </div>
+    </div>
+
+    <button class="copilot-btn" onclick="toggleChat()">✨ EduBridge Copilot</button>
+    
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>EduBridge Copilot</span>
+            <button class="chat-close" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg bot">Hello! I am your AI Career Copilot. Ask me anything about STEM programs, medical internships, or competitions in Korea! (e.g., "Show me programs at Samsung" or "What options are in Bio tech?")</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Ask Copilot a question..." onkeypress="handleChatKey(event)">
+            <button class="chat-send" onclick="sendChatMessage()">➔</button>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="#" onclick="goHome()">STEM Programs</a></li>
+                        <li><a href="#" onclick="goHome()">Medical Internships</a></li>
+                        <li><a href="#" onclick="goHome()">Humanities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Civilian Association</h3>
+                    <ul>
+                        <li><a href="#">About Our Policy</a></li>
+                        <li><a href="#">Urban-Rural Gap Project</a></li>
+                        <li><a href="#">Join the Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Instagram: @EduBridge_KR</a></li>
+                        <li><a href="#">Email: info@edubridge.kr</a></li>
+                        <li><a href="#">Contact Logs & Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>Copyright © 2026 EduBridge Civilian Association. All rights reserved.</div>
+                <div>South Korea | Gimpo & Seoul</div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        function filterOpportunities() {
-            // Get user input and convert to lowercase for uniform matching
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const grid = document.getElementById('opportunitiesGrid');
-            const cards = grid.getElementsByClassName('opportunity-card');
-            const noResults = document.getElementById('noResults');
-            let visibleCount = 0;
+        // Database of 42 Internships, Mentorships, and Competitions
+        const database = [
+            { id: 1, type: 'stem', badge: 'STEM Mentorship', title: 'Semiconductor Science Classroom', host: 'Samsung Electronics', shortDesc: 'Regional out-of-school mentoring modules led by corporate researchers.', fullDesc: 'Students engage directly with Samsung researchers to understand basic chip architecture. Provides physical engineering kits and aims to bridge the urban-rural tech gap in South Korea.', tags: 'samsung semiconductor stem engineering tech fabrication cleanroom' },
+            { id: 2, type: 'stem', badge: 'STEM Program', title: 'Heinstein AI & Coding Camp', host: 'SK Hynix', shortDesc: 'Hands-on corporate coding and AI problem-solving software immersion.', fullDesc: 'Designed specifically for students in underserved regional sectors. SK Hynix engineers mentor students through AI machine learning models and Python-based logic puzzles.', tags: 'sk hynix ai coding software computer programming' },
+            { id: 3, type: 'med', badge: 'Medical Internship', title: 'Clinical Dental Simulation', host: 'Deron Dental', shortDesc: 'A project-based, simulation-driven immersion in dental care.', fullDesc: 'Step into the roles of both dentist and patient. Learn first-hand how to perform a proper oral examination in the dental chair, understanding the day-to-day realities of medical practice.', tags: 'deron dental clinic medical doctor dentistry dentist teeth simulation' },
+            { id: 4, type: 'hum', badge: 'Media Internship', title: 'Digital Media & Publishing', host: "That's Guangzhou / Seoul", shortDesc: 'Journalism sprint covering interviewing, filming, and video editing.', fullDesc: 'An immersive media training journey. Students learn to craft articles, conduct interviews, and shoot video content, culminating in a real-world publishable article.', tags: 'media journalism writing video editing humanities publishing reporter' },
+            { id: 5, type: 'stem', badge: 'Research Mentorship', title: 'Advanced Regional Lab Expeditions', host: 'POSTECH', shortDesc: 'Connects high school students with university research mentors.', fullDesc: 'Focuses on convergent science projects. High schoolers shadow post-graduates in material sciences, applying theoretical chemistry to real-world industrial problems.', tags: 'postech university research chemistry lab stem gachi-baeum science classroom mentoring' },
+            { id: 6, type: 'hum', badge: 'Business Project', title: 'Corporate HR & Communication', host: 'SGD Pharma', shortDesc: 'Analyze workforce environments by designing staff surveys.', fullDesc: 'Working alongside HR mentors, students design internal staff surveys, gather operational feedback, and produce summary videos used for company internal communication.', tags: 'sgd pharma hr business corporate humanities management survey' },
+            { id: 7, type: 'stem', badge: 'STEM Program', title: 'Naver AI Hackathon Youth', host: 'Naver', shortDesc: 'Weekend sprint to build AI-driven solutions for social issues.', fullDesc: 'Students collaborate in teams to develop basic AI chatbots utilizing Naver Clova APIs, focusing on practical solutions for public accessibility.', tags: 'naver ai hackathon coding stem bot' },
+            { id: 8, type: 'stem', badge: 'STEM Mentorship', title: 'Kakao Tech Internship', host: 'Kakao Corp', shortDesc: 'High school developer shadowing program focusing on UI/UX.', fullDesc: 'Experience the agile development process. Mentors guide students through wireframing and front-end basics used in real Kakao apps.', tags: 'kakao tech software ui ux design framework development' },
+            { id: 9, type: 'comp', badge: 'Competition', title: 'Korea Science & Engineering Fair (KSEF)', host: 'KSEF Board', shortDesc: 'National science fair selecting delegates for Intel ISEF.', fullDesc: 'The premier research competition in Korea. Students present months-long lab projects to academic juries.', tags: 'ksef science fair competition research award kansas' },
+            { id: 10, type: 'comp', badge: 'Competition', title: 'Korea Olympiad in Informatics', host: 'KOI', shortDesc: 'National algorithmic programming competition.', fullDesc: 'Tests high school students on advanced data structures, algorithms, and logical problem solving using C++ and Python.', tags: 'koi informatics coding competition math programming tournament' },
+            { id: 11, type: 'med', badge: 'Medical Camp', title: 'Asan Youth Medical Explorer', host: 'Asan Medical Center', shortDesc: 'Hospital shadowing and basic anatomy workshops.', fullDesc: 'Students tour state-of-the-art surgical wards, attend basic life support (BLS) training, and shadow pediatricians.', tags: 'asan medical hospital doctor anatomy surgery clinical medicine' },
+            { id: 12, type: 'stem', badge: 'STEM Camp', title: 'Future Mobility Tech Camp', host: 'Hyundai Motor Group', shortDesc: 'Learn the mechanics behind EV and autonomous driving.', fullDesc: 'Students build scale models of electric vehicles and program basic obstacle-avoidance sensors.', tags: 'hyundai ev mobility car engineering autonomous car' },
+            { id: 13, type: 'stem', badge: 'STEM Program', title: 'LG CNS Coding Genius', host: 'LG CNS', shortDesc: 'Free coding education program for regional middle/high schools.', fullDesc: 'Focuses on Java, app development, and big data basics, heavily targeting students outside of major urban centers.', tags: 'lg cns coding java app data rural outreach' },
+            { id: 14, type: 'stem', badge: 'Research Camp', title: 'SNU Data Science Initiative', host: 'Seoul National University', shortDesc: 'Introduction to big data and statistical modeling.', fullDesc: 'High schoolers learn R and Python to analyze real-world datasets regarding climate change and urban planning.', tags: 'snu seoul national university data science math modeling statistics' },
+            { id: 15, type: 'stem', badge: 'Robotics Mentorship', title: 'KAIST Robo-Builders', host: 'KAIST', shortDesc: 'Design, build, and program functional robotic arms.', fullDesc: 'Led by KAIST engineering students, this camp immerses youth in mechanical engineering and ROS (Robot Operating System).', tags: 'kaist robotics robot engineering physics arm programming' },
+            { id: 16, type: 'hum', badge: 'Business Case', title: 'Yonsei Youth Consulting', host: 'Yonsei University', shortDesc: 'High school business case competition on ESG.', fullDesc: 'Teams are given a real corporate dilemma and must present an ESG (Environmental, Social, Governance) strategy to a panel of professors.', tags: 'yonsei business esg consulting humanities strategy finance' },
+            { id: 17, type: 'hum', badge: 'Marketing Intern', title: 'Amorepacific Brand Creators', host: 'Amorepacific', shortDesc: 'Develop cosmetic marketing campaigns for Gen Z.', fullDesc: 'Students learn market research, trend analysis, and digital marketing, pitching a final product concept to executives.', tags: 'amorepacific cosmetics marketing business advertisement' },
+            { id: 18, type: 'med', badge: 'Bio-Tech Intern', title: 'Celltrion Bio-Simulators', host: 'Celltrion', shortDesc: 'Introduction to biopharmaceutical manufacturing.', fullDesc: 'An inside look at how biosimilars are made, featuring lab safety protocols and basic microbiological cell culturing.', tags: 'celltrion bio medicine pharmacy lab biotech engineering' },
+            { id: 19, type: 'med', badge: 'Medical Camp', title: 'Severance Hospital Volunteering', host: 'Yonsei Severance', shortDesc: 'Patient support and hospital administration experience.', fullDesc: 'Students assist in non-clinical roles, guiding patients and organizing administrative data, learning hospital logistics.', tags: 'severance hospital volunteer medical care nursing' },
+            { id: 20, type: 'stem', badge: 'STEM Camp', title: 'Hanwha Space Hub Explorer', host: 'Hanwha Aerospace', shortDesc: 'Aerospace engineering and rocket physics basics.', fullDesc: 'Students learn about satellite trajectories, propulsion systems, and the future of Korea’s space industry.', tags: 'hanwha space aerospace rocket physics satellite navigation' },
+            { id: 21, type: 'comp', badge: 'Competition', title: 'National Debate Championship', host: 'Korea Debate Association', shortDesc: 'Parliamentary debate on domestic policy and ethics.', fullDesc: 'Fosters critical thinking and public speaking, requiring students to defend complex socio-economic policies.', tags: 'debate public speaking humanities policy tournament forensics' },
+            { id: 22, type: 'hum', badge: 'Humanities Camp', title: 'Model United Nations Korea', host: 'MUN Korea', shortDesc: 'Simulated UN committees discussing global crises.', fullDesc: 'Students act as delegates, drafting resolutions on climate change, human rights, and global health.', tags: 'mun model un diplomacy politics global affairs speech' },
+            { id: 23, type: 'stem', badge: 'Environment Camp', title: 'K-Water Eco-Science Camp', host: 'K-Water', shortDesc: 'Water quality testing and environmental engineering.', fullDesc: 'Field trips to dams and reservoirs where students test water samples and learn about sustainable water management.', tags: 'k-water environment science biology eco ecology sustainability' },
+            { id: 24, type: 'med', badge: 'Bio-Tech Intern', title: 'Samsung Biologics Youth Lab', host: 'Samsung Biologics', shortDesc: 'Tour and basic training in CMO pharmaceutical labs.', fullDesc: 'Introduces students to the strict quality control and biological engineering required to mass-produce vaccines and therapeutics.', tags: 'samsung biologics medicine tech pharma bio sequencing' },
+            { id: 25, type: 'hum', badge: 'Finance Intern', title: 'Mirae Asset Youth Finance', host: 'Mirae Asset', shortDesc: 'Financial literacy and mock stock trading.', fullDesc: 'Students learn macroeconomics, personal finance, and participate in a risk-free stock market simulation.', tags: 'mirae asset finance economy business stock investment banking' },
+            { id: 26, type: 'comp', badge: 'Competition', title: 'K-Hackathon', host: 'Ministry of Science', shortDesc: 'App development competition for social good.', fullDesc: 'Students from across the country pitch and build mobile apps aimed at solving local community problems.', tags: 'hackathon app science government coding programming app building' },
+            { id: 27, type: 'hum', badge: 'Media Program', title: 'KBS Youth Broadcasting', host: 'KBS', shortDesc: 'Experience the television production control room.', fullDesc: 'Shadow directors and audio engineers during live broadcast preparations, learning the technical side of mass media.', tags: 'kbs broadcast tv media humanities video radio show' },
+            { id: 28, type: 'comp', badge: 'Competition', title: 'Eco-thon Sustainability Pitch', host: 'Ministry of Environment', shortDesc: 'Pitch green-tech ideas to environmental experts.', fullDesc: 'Focuses on circular economy ideas, from recycling logistics to carbon footprint tracking apps.', tags: 'eco environment sustainability pitch entrepreneurial tournament' },
+            { id: 29, type: 'stem', badge: 'Game Dev Camp', title: 'Nexon Game Jam for Youth', host: 'Nexon', shortDesc: '48-hour sprint to create a 2D indie game.', fullDesc: 'Students learn Unity basics, pixel art, and level design, working in teams to produce a playable game prototype.', tags: 'nexon game development unity art code gaming design' },
+            { id: 30, type: 'hum', badge: 'Economics Camp', title: 'Bank of Korea Economy Camp', host: 'Bank of Korea', shortDesc: 'Deep dive into monetary policy and interest rates.', fullDesc: 'Interactive lectures by central bankers on how inflation and national debt shape the South Korean economy.', tags: 'bank of korea economics finance humanities macroeconomics interest' },
+            { id: 31, type: 'med', badge: 'Medical Camp', title: 'Green Cross (GC) Bio Camp', host: 'GC Pharma', shortDesc: 'Immunology basics and blood plasma research.', fullDesc: 'An educational tour of one of Korea’s leading blood product facilities, learning about vaccines and antibodies.', tags: 'gc green cross blood pharma medical injection immunology' },
+            { id: 32, type: 'stem', badge: 'STEM Camp', title: 'UNIST Battery Tech Explorers', host: 'UNIST', shortDesc: 'Explore next-generation lithium-ion battery tech.', fullDesc: 'University professors guide students through the chemistry of energy storage, crucial for the future of EVs.', tags: 'unist battery energy chemistry physics storage lithium' },
+            { id: 33, type: 'med', badge: 'Bio-Tech Intern', title: 'Macrogen Genomic Sequencing', host: 'Macrogen', shortDesc: 'Introduction to DNA extraction and bioinformatics.', fullDesc: 'Students learn how genetic diseases are identified using advanced sequencing machines and software.', tags: 'macrogen dna genetics bio biology sequence data processing' },
+            { id: 34, type: 'stem', badge: 'STEM Mentorship', title: 'GIST AI & Laser Physics', host: 'GIST', shortDesc: 'Photonics and artificial intelligence lab shadowing.', fullDesc: 'High school students observe advanced optics experiments and learn how AI analyzes physical data.', tags: 'gist physics laser optics math photonics algorithm' },
+            { id: 35, type: 'hum', badge: 'Business Project', title: 'POSCO Corporate Citizenship', host: 'POSCO', shortDesc: 'Study the steel industry’s transition to green energy.', fullDesc: 'Students propose community outreach projects for POSCO, learning about corporate social responsibility (CSR).', tags: 'posco steel business csr management factory infrastructure' },
+            { id: 36, type: 'comp', badge: 'Competition', title: 'Youth Startup Pitch Deck', host: 'Seoul Startup Hub', shortDesc: 'Shark-tank style pitch competition for high schoolers.', fullDesc: 'Mentors help students refine a business model canvas before they pitch to real angel investors for feedback.', tags: 'startup business entrepreneur pitch plan investment canvas' },
+            { id: 37, type: 'hum', badge: 'Media Program', title: 'Arirang TV Global Reporting', host: 'Arirang TV', shortDesc: 'English journalism and news anchoring practice.', fullDesc: 'Improve public speaking and journalistic writing by drafting international news segments in English.', tags: 'arirang tv english news media anchoring reporting speech' },
+            { id: 38, type: 'med', badge: 'Bio-Tech Intern', title: 'Seegene Diagnostic Labs', host: 'Seegene', shortDesc: 'PCR testing and molecular diagnostics overview.', fullDesc: 'Learn the biotechnology behind rapid disease testing, utilizing pipettes and observing real PCR machines.', tags: 'seegene pcr bio diagnostics medical virus mutation laboratory' },
+            { id: 39, type: 'stem', badge: 'STEM Program', title: 'NCSoft AI Gaming Lab', host: 'NCSoft', shortDesc: 'How AI controls NPC behavior in modern gaming.', fullDesc: 'Learn the underlying decision-trees and machine learning algorithms that make video game characters react dynamically.', tags: 'ncsoft ai gaming software coding behavior models tree' },
+            { id: 40, type: 'comp', badge: 'Competition', title: 'Space Challenge', host: 'Korea Aerospace Research Institute', shortDesc: 'Model rocket and glider flight competition.', fullDesc: 'Students apply aerodynamics to build the longest-flying or highest-reaching gliders and water rockets.', tags: 'kari space rocket competition engineering aerodynamics glider launch' },
+            { id: 41, type: 'med', badge: 'Bio-Tech Intern', title: 'Hanmi Pharm Drug Discovery', host: 'Hanmi Pharmaceutical', shortDesc: 'The lifecycle of bringing a new drug to market.', fullDesc: 'Seminar-based immersion detailing clinical trials, FDA/KFDA approvals, and synthetic chemistry.', tags: 'hanmi pharm drug chemistry bio medication clinical trials' },
+            { id: 42, type: 'hum', badge: 'Finance Intern', title: 'Shinhan Bank Youth Teller', host: 'Shinhan Bank', shortDesc: 'Retail banking and customer financial services.', fullDesc: 'A practical look into branch operations, learning how loans, deposits, and digital banking platforms function.', tags: 'shinhan bank finance economy money savings deposit credit' }
+        ];
 
-            // Loop through all opportunity cards
-            for (let i = 0; i < cards.length; i++) {
-                // Read the custom data-keywords attribute containing the tags
-                let keywords = cards[i].getAttribute('data-keywords');
-                
-                // Also pull visible text fields to ensure thorough matching
-                let cardText = cards[i].innerText.toLowerCase();
-                
-                // If input matches keywords or text, show card; otherwise, hide it
-                if (keywords.includes(input) || cardText.includes(input)) {
-                    cards[i].style.display = "";
-                    visibleCount++;
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
+        const grid = document.getElementById('cardGrid');
+        const noResults = document.getElementById('noResults');
 
-            // Handle visibility of the "No Results" element
-            if (visibleCount === 0) {
-                noResults.style.display = "block";
+        // Initial Card Render
+        function renderCards(data) {
+            grid.innerHTML = '';
+            if(data.length === 0) {
+                noResults.style.display = 'block';
             } else {
-                noResults.style.display = "none";
+                noResults.style.display = 'none';
+                data.forEach(item => {
+                    let badgeClass = 'b-stem';
+                    if (item.type === 'med') badgeClass = 'b-med';
+                    if (item.type === 'hum') badgeClass = 'b-hum';
+                    if (item.type === 'comp') badgeClass = 'b-comp';
+
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.onclick = () => openDetail(item.id);
+                    card.innerHTML = `
+                        <span class="badge ${badgeClass}">${item.badge}</span>
+                        <div class="c-title">${item.title}</div>
+                        <div class="c-host">${item.host}</div>
+                        <div class="c-desc">${item.shortDesc}</div>
+                        <div class="c-link">Learn more &rsaquo;</div>
+                    `;
+                    grid.appendChild(card);
+                });
             }
         }
+
+        // Apple-Style Filter Action
+        function filterCards() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const filteredData = database.filter(item => {
+                return item.title.toLowerCase().includes(input) || 
+                       item.host.toLowerCase().includes(input) || 
+                       item.tags.toLowerCase().includes(input) ||
+                       item.shortDesc.toLowerCase().includes(input);
+            });
+            renderCards(filteredData);
+        }
+
+        // Single Page Architecture Subpage Routing
+        function openDetail(id) {
+            const item = database.find(d => d.id === id);
+            if(item) {
+                document.getElementById('detTitle').innerText = item.title;
+                document.getElementById('detHost').innerText = "Hosted by: " + item.host;
+                document.getElementById('detFullDesc').innerText = item.fullDesc;
+                
+                let badgeClass = 'b-stem';
+                if (item.type === 'med') badgeClass = 'b-med';
+                if (item.type === 'hum') badgeClass = 'b-hum';
+                if (item.type === 'comp') badgeClass = 'b-comp';
+                
+                const badgeEl = document.getElementById('detBadge');
+                badgeEl.innerText = item.badge;
+                badgeEl.className = "badge " + badgeClass;
+
+                document.getElementById('home-view').style.display = 'none';
+                document.getElementById('detail-view').style.display = 'block';
+                window.scrollTo(0,0);
+            }
+        }
+
+        function goHome() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('home-view').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        // Interactive AI Chat Engine Functions
+        function toggleChat() {
+            const win = document.getElementById('chatWindow');
+            if(win.style.display === 'flex') {
+                win.style.display = 'none';
+            } else {
+                win.style.display = 'flex';
+            }
+        }
+
+        function handleChatKey(e) {
+            if(e.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const inputEl = document.getElementById('chatInput');
+            const txt = inputEl.value.trim();
+            if(!txt) return;
+
+            // Render User Prompt Bubble
+            appendMessage(txt, 'user');
+            inputEl.value = '';
+
+            // Generate Simulated AI Insights Response
+            setTimeout(() => {
+                const lowerText = txt.toLowerCase();
+                let reply = "";
+
+                // Core Match Rules
+                let matches = database.filter(item => {
+                    return lowerText.includes(item.host.toLowerCase()) || 
+                           lowerText.includes(item.type) || 
+                           item.tags.split(' ').some(tag => lowerText.includes(tag));
+                });
+
+                if(matches.length > 0) {
+                    reply = `Based on your request, I found ${matches.length} matching programs. Here are the top suggestions: <br/><br/>`;
+                    matches.slice(0, 3).forEach(m => {
+                        reply += `<strong>• ${m.title}</strong> (${m.host})<br/><em>${m.shortDesc}</em><br/><br/>`;
+                    });
+                    reply += "You can search their names in the primary search bar above to see full structural application outlines!";
+                } else if(lowerText.includes('hi') || lowerText.includes('hello') || lowerText.includes('hey')) {
+                    reply = "Hello! I am the EduBridge Copilot assistant. Tell me what industry or corporate brand you are looking to explore (e.g., 'Samsung', 'Bio', or 'Competition') and I will pull customized options instantly!";
+                } else if(lowerText.includes('why') || lowerText.includes('policy') || lowerText.includes('gap')) {
+                    reply = "EduBridge operates as a civilian association targeting structural educational inequality across South Korea. We help regional or peripheral students access corporate training to prevent blind, irreversible major selections caused by extreme exam stress.";
+                } else {
+                    reply = "I couldn't find a direct program match for that specific term. Try asking about general pathways like 'STEM', 'Medical', or specific groups like 'Samsung', 'SK Hynix', or 'POSTECH'.";
+                }
+
+                appendMessage(reply, 'bot');
+            }, 500);
+        }
+
+        function appendMessage(text, sender) {
+            const container = document.getElementById('chatMessages');
+            const bubble = document.createElement('div');
+            bubble.className = `msg ${sender}`;
+            bubble.innerHTML = text;
+            container.appendChild(bubble);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Initialize App Main Render
+        renderCards(database);
     </script>
 
 </body>
